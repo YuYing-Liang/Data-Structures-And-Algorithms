@@ -1,0 +1,87 @@
+import random
+
+class conway:
+	#assuming the user will enter integer, integer, string
+	def __init__(self, numLists, numIntegers, strInts):
+		self.numLists = numLists
+		self.numIntegers = numIntegers
+		self.strInts = strInts
+		self.content = []
+		
+		if self.strInts == "random":
+			#set all numIntegers in numLists of lists to ran fnc
+			
+			for i in range(0, numLists, 1):
+				listNums = []
+				for i in range(0, numIntegers, 1):
+					listNums += [random.randint(0,1)]
+				self.content += [listNums]
+		else:
+			#set all numIntegers in numLists of lists to 0 (default)
+
+			for i in range(0, numLists, 1):
+				listNums = []
+				for i in range(0, numIntegers, 1):
+					listNums += [0]
+				self.content += [listNums]
+
+	def getDisp(self):
+		des = ""
+		for l in self.content:
+			data = l
+			for i in data:
+				if i == 0:
+					des += " "
+				else:
+					des += "*"
+			des += "\n"
+		return des
+
+	def printDisp(self):
+		try:
+			print(self.getDisp())
+			return True
+		except:
+			return False
+
+	def setPos(self, row, col, val):
+		if type(val) == int:
+			if (val == 0 or val == 1) and ((row >= 0 and row <= self.numLists - 1) and (col >= 0 and col <= self.numIntegers - 1)):
+				self.content[row][col] = val
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	def getNeighbours(self, row, col):
+		#the list that is returned will follow the following order of positions around
+		#the given value of the matrix: [top-left, top, top-right, right, bottom-right,
+		#bottom, bottom-left, left]
+		
+		if type(row) == int and type(col) == int:
+			if (row >= 0 and row <= self.numLists - 1) and (col >= 0 and col <= self.numIntegers - 1):
+				if row-1 < 0:
+					row += self.numLists
+		
+				if col-1 < 0:
+					col += self.numIntegers 
+
+				if row + 1 > self.numLists - 1:
+					row -= self.numLists
+
+				if col + 1 > self.numIntegers - 1:
+					col -= self.numIntegers
+
+				return [self.content[row-1][col-1], self.content[row-1][col], self.content[row-1][col+1],self.content[row][col+1], self.content[row+1][col+1], self.content[row+1][col],self.content[row+1][col-1],self.content[row][col-1]]
+			else:
+				return []				
+		else:
+			return []
+
+
+
+		
+		
+		
+		

@@ -1,0 +1,136 @@
+# Code for reading parameters from the system:
+# This is an example of a program that will take in arguments.
+# It is best to name your arguments rather than relying on position;
+# this enables a user to use your program without memorizing
+# argument order. This is a standard industrial practice.
+# Below, you see that there are two named arguments that each take
+# an additional parameter:
+# --fin <ADDITIONAL-PARAM> --fout <ADDITIONAL-PARAM>
+# This may be used in a program that takes in the name of
+# an input and output file, in order to do further processing.
+# You may modify this template for your purposes.
+#
+# The loop that is iterating over all the input arguments begins at
+# 1, since sys.argv[0] is always the name of the program
+# (in this case, "argtest.py", unless you renamed it).
+# The loop is incrementing one arg at a time; since --fin and --fout
+# take an additional argument, I created a variable called "skip"
+# that enables you to skip over the filename during the looping
+# since the --fin and --fout processing will always look at and
+# consume the next argument. Note that I test to ensure
+# --fin or --fout always have a trailing argument. Otherways, the
+# program will give an "out of range" warning.
+#
+# This is course content. You must understand this. To understand this
+# use it, modify it and experiment with it.
+#
+# usage: python argtest.py --fin blah_in --fout blah_out
+# where you may change the names blah_in and blah_out as needed
+#
+# mathaine@ecf.utoronto.ca
+
+
+import sys
+
+main()
+
+def main():
+   FIN=""
+   FOUT=""
+   COL=0
+   DIR=1    #1 = ascending, -1 = descending
+   nargs=len(sys.argv)
+   skip=False
+
+   #breaks out of loop if argument is incorrect
+   for i in range(1,nargs):
+      if not skip:
+         arg=sys.argv[i]
+         print("INFO: processing",arg)
+         if arg == "--fin":
+            if i != nargs-1:
+               FIN=sys.argv[i+1]
+               skip=True
+         elif arg == "--fout":
+	    if i != nargs-1:
+	       FOUT=sys.argv[i+1]
+               skip=True
+         #do error checking for col
+         elif arg == '--col'
+	    if i != nargs - 1:
+               try:
+	          COL = int(sys.argv[i+1])   
+                  skip = True
+               except:
+                  print("the argument for --col is incorrect")
+                  return False
+         elif arg == '--dir'
+            if i != nargs - 1:
+              direction = sys.argv[i+1]
+              #turn into +1 or -1
+              if direction == "-":
+                 DIR = -1
+         else:
+            print("ERR: unknown arg:",arg)
+      else:
+         skip=False
+
+   try:
+      numbers = readFile(FIN)
+      
+      sortedList = sortNumbers(COL, DIR, numbers)
+      
+      writeFile(FOUT, sortedList)
+
+      return True
+   except:
+      print("ERR: file", FIN, "is not present or can't be opened")
+      return False
+
+def readFile(fileIn):
+   csvFileIn = open(fileIn, 'r') #r means "reading"
+   lines = csvFileIn.readlines()
+   csvFileIn.close()
+
+   #reading file
+   numbers = []
+   for i in lines:
+      lineWithoutSpace = i.split('\n')[0]
+      numsInLine = lineWithoutSpace.split(',')
+      integers[]
+      #convert to integers
+      for x in numsInLine:
+         integers += [int(x)]
+      numbers += [integers]
+   return numbers
+
+def writeFile(fileout, sortedList):
+
+   #writing to new fout
+   csvFileOut = open(fileout, 'w') #w means "write"
+
+   for i in sortedList:
+      numsInLine = i
+      for x in range(0, numsInLine, 1):
+         if x == len(numsInLine) - 1:
+            csvFileOut.write(str(x)+"\n")
+         else:
+            csvFileOut.write(str(x)+",")
+
+   csvFileOut.close()
+   return True
+   
+def sortNumbers(col, direc, numbers):
+   #sort numbers
+   def genKey(column, direction):
+      def key(x):
+         if column >= len(x):
+            return x[len(x) - 1] * direction
+         else:
+            return x[column] * direction
+      return key
+
+   sortedList = sorted(numbers, key=genKey(col,direc))
+   print(sortedList) #take this away
+   return sortedList
+

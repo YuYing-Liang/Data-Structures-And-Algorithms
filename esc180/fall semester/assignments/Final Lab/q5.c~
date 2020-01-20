@@ -1,0 +1,9 @@
+/*Question Five*/
+int g(char *array, int n);
+
+int g(char *array, int n){
+	if(array == NULL){ return -1;}
+	array = (char *)malloc(n * sizeof(char));
+	return 0;
+}
+

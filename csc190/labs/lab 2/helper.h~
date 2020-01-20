@@ -1,0 +1,14 @@
+struct bstNode {
+	int val;
+	struct bstNode *l;
+	struct bstNode *r;
+};
+typedef struct bstNode bstNode;
+
+struct avlNode{	/*can tolerate an imbalance of at most 1*/
+	int balance;	/* -1 left, 0 balanced, +1 rigth */
+	int val;
+	struct avlNode *l;
+	struct avlNode *r;
+};
+typedef struct avlNode avlNode;

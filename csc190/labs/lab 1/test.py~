@@ -1,0 +1,63 @@
+import tree
+import binary_tree
+
+#convert to binary tree
+'''
+Tree:
+'''
+'''
+x=tree.tree(1)
+y=tree.tree(2)
+z=tree.tree(3)
+a=tree.tree(4)
+b=tree.tree(5)
+c=tree.tree(6)
+x.AddSuccessor(y)
+x.AddSuccessor(z)
+x.AddSuccessor(a)
+y.AddSuccessor(b)
+y.AddSuccessor(c)
+print(x.Get_LevelOrder())
+b = x.ConvertToBinaryTree()
+print(b.Get_LevelOrder())
+'''
+
+#convert to general tree
+'''
+Tree:		1
+	2		3
+		    4	    5
+'''
+'''
+x=binary_tree.binary_tree(1)
+a=binary_tree.binary_tree(2)
+x.AddLeft(a)
+y=binary_tree.binary_tree(3)
+y.AddLeft(binary_tree.binary_tree(4))
+y.AddRight(binary_tree.binary_tree(5))
+x.AddRight(y)
+print(x.Get_LevelOrder())
+t = x.ConvertToTree(x)
+print(t.Get_LevelOrder())
+'''
+'''
+Tree:			1
+		2
+	   5	     3
+	      6		4
+'''
+a = binary_tree.binary_tree(1)
+b = binary_tree.binary_tree(2)
+c = binary_tree.binary_tree(3)
+d = binary_tree.binary_tree(4)
+e = binary_tree.binary_tree(5)
+f = binary_tree.binary_tree(6)
+a.AddLeft(b)
+b.AddLeft(e)
+b.AddRight(c)
+e.AddRight(f)
+c.AddRight(d)
+print(a.Get_LevelOrder())
+t2 = a.ConvertToTree(a)
+
+

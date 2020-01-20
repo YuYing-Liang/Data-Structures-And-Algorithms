@@ -1,0 +1,22 @@
+class queue:
+	def __init__(self, data):
+		if type(data) == list:
+			self.values = data #assumes data is a list
+		else:
+			self.values = []
+
+	def push(self, val):
+		#add to head
+		self.values = [val] + self.values
+		return True
+
+	def shift(self):
+		#take from tail
+		self.values = self.values[0:len(self.values)-1]
+		return True
+
+	def getValues(self):
+		return self.values
+
+	def getLength(self):
+		return len(self.values)

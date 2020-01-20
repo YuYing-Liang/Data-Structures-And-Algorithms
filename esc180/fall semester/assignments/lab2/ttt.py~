@@ -1,0 +1,60 @@
+from tttlib import *
+
+T = genBoard()
+
+print("You are player X, your turn is first, if you enter an invalid turn position you will be penalized.")
+printBoard(T)
+
+#assuming value entered by x is an integer because we haven't learned try, catch yet
+while True:
+	
+	Xmove = int(input("x move?"))
+	
+	if T[Xmove] == 0:
+		T[Xmove] = playerX
+	else:
+		print("there is already a player there, to punish you for not watching, you miss a turn")
+
+	printBoard(T)
+	print()
+
+	state = analyzeBoard(T)
+
+	if state == 1:
+		print("X won!")
+		break
+	elif state == 2:
+		print("O won!")
+		break
+	elif state == 3:
+		print("Tie game!")
+		break
+	elif state == -1:
+		print("error")
+		break
+
+	T = genOpenMove(T, 2)
+	
+	print("O Move:" + int(T))
+
+	printBoard(T)
+	print()
+
+	state = analyzeBoard(T)
+	
+	if state == 1:
+		print("X won!")
+		break
+	elif state == 2:
+		print("O won!")
+		break
+	elif state == 3:
+		print("Tie game!")
+		break
+	elif state == -1:
+		print("error")
+
+	
+	
+	
+		
